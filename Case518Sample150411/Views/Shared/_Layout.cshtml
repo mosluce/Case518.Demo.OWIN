@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWIN SAMPLE</title>
+    <!--Styles-->
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <!--Angular-->
+    <script src="~/Scripts/bower_components/angular/angular.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-validation/dist/angular-validation.min.js"></script>
+    <script src="~/Scripts/bower_components/angular-validation/dist/angular-validation-rule.min.js"></script>
+    <script src="~/Scripts/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <!--jQuery & Bootstrap-->
+    <script src="~/Scripts/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/bower_components/modernizr/modernizr.js"></script>
+    <script src="~/Scripts/app/startup.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" ng-init="authenticated=@(User.Identity.IsAuthenticated?"true":"false")">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hi!OWIN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div>
+                <ul class="nav navbar-nav" ng-show="authenticated">
+                    <li>
+                        <a ui-sref="auth.profiles">
+                            修改
+                        </a>
+                        <a ui-sref="auth.logout">
+                            登出
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav" ng-hide="authenticated">
+                    <li>
+                        <a ui-sref="auth.login">
+                            登入
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container body-content" style="padding: 8px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+</body>
+</html>
