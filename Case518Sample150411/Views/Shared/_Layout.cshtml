@@ -24,7 +24,7 @@
     <script src="~/Scripts/app/startup.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" ng-init="authenticated=@(User.Identity.IsAuthenticated?"true":"false");username=@User.Identity.Name;">
+    <div class="navbar navbar-inverse navbar-fixed-top" ng-init="authenticated=@(User.Identity.IsAuthenticated?"true":"false");username='@(User.Identity.Name)';">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
