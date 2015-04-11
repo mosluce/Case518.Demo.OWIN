@@ -20,6 +20,7 @@
                     if (result.Success) {
                         //切換選單狀態
                         $rootScope.authenticated = true;
+                        $rootScope.username = result.Data.Name;
                         //回到首頁
                         $state.go("home");
                     } else {

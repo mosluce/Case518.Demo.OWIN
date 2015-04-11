@@ -128,7 +128,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Icon.png" />
-    <Content Include="Models\SampleDbContext.edmx.sql" />
     <Content Include="Scripts\app\ctrl\auth\login.js" />
     <Content Include="Scripts\app\ctrl\auth\register.js" />
     <Content Include="Scripts\app\startup.js" />
@@ -473,27 +472,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\SampleDbContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SampleDbContext.Context.tt</DependentUpon>
+    <Compile Include="Migrations\201504111154182_Init.cs" />
+    <Compile Include="Migrations\201504111154182_Init.Designer.cs">
+      <DependentUpon>201504111154182_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\SampleDbContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SampleDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SampleDbContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SampleDbContext.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>SampleDbContext.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserGender.cs">
-      <DependentUpon>SampleDbContext.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\SampleDbContext.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Models\ViewModels\Result.cs" />
@@ -653,24 +638,8 @@
     <Content Include="Scripts\bower_components\modernizr\test\caniuse_files\Windsong-webfont.otf" />
     <Content Include="Scripts\bower_components\modernizr\test\caniuse_files\Windsong-webfont.ttf" />
     <Content Include="Scripts\bower_components\modernizr\test\caniuse_files\Windsong-webfont.woff" />
-    <EntityDeploy Include="Models\SampleDbContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SampleDbContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\SampleDbContext.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SampleDbContext.edmx</DependentUpon>
-      <LastGenOutput>SampleDbContext.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\SampleDbContext.edmx.diagram">
-      <DependentUpon>SampleDbContext.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\SampleDbContext.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SampleDbContext.edmx</DependentUpon>
-      <LastGenOutput>SampleDbContext.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Auth\Activate.cshtml" />
+    <None Include="Properties\PublishProfiles\Case518Sample150411.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -678,7 +647,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201504111154182_Init.resx">
+      <DependentUpon>201504111154182_Init.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />

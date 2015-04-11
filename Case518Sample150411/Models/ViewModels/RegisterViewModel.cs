@@ -12,7 +12,7 @@ namespace Case518Sample150411.Models.ViewModels
         public string Name { get; set; }
         public string Password { get; set; }
         public string ValidationCode { get; set; }
-        public UserGender Gender { get; set; }
+        public AppUser.UserGender Gender { get; set; }
         public bool Subscribe { get; set; }
     }
 }

@@ -94,7 +94,7 @@ namespace Case518Sample150411.Controllers
 
                 ShortGuid code = Guid.NewGuid();
 
-                var user = db.Users.Add(new User
+                var user = db.Users.Add(new AppUser
                 {
                     Email = model.Email,
                     Gender = model.Gender,
