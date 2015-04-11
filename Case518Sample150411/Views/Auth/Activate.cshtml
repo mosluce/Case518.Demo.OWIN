@@ -1,0 +1,38 @@
+﻿@model bool
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>啟動帳號</title>
+    <script type="text/javascript">
+        function onload() {
+            setTimeout(function() {
+                location.href = "/#/auth/login";
+            }, 5000);
+        }
+    </script>
+</head>
+<body onload="onload()">
+<div>
+    @{
+        if (Model)
+        {
+            <text>
+                啟動成功
+            </text>
+        }
+        else
+        {
+            <text>
+                驗證碼無效
+            </text>
+        }
+    }
+</div>
+</body>
+</html>

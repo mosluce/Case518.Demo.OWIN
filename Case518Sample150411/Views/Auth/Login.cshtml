@@ -2,40 +2,44 @@
     Layout = null;
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        登入表單
+<form name="Form">
+    <div cg-busy="onprocess">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                登入表單
+            </div>
+            <div class="panel-body" style="position: relative;">
+                <div class="form-group">
+                    <label>
+                        電子郵件 <input class="form-control" ng-model="user.email" type="email" required />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        密碼 <input class="form-control" ng-model="user.password" type="password" required />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        驗證碼
+                        <img ng-model="validationCodeImg" alt="validation code" ng-src="{{vcimg}}" ng-click="getvc()" />
+                        <input class="form-control" ng-model="user.validationCode" required />
+                    </label>
+                </div>
+                <div style="position: absolute; right: 10px; top: 10px;">
+                    <a class="btn btn-primary">Facebook 登入</a>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div style="float: right;">
+                    <button class="btn btn-default" ng-click="login()">登入</button>
+                </div>
+                <div class="left;">
+                    <button class="btn btn-link" ng-click="register()">註冊</button>
+                    <button class="btn btn-link" ng-click="forgot()">忘記密碼</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
     </div>
-    <div class="panel-body" style="position: relative;">
-        <div class="form-group">
-            <label>
-                電子郵件 <input class="form-control" ng-model="login.email" type="email" required/>
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                密碼 <input class="form-control" ng-model="login.password" type="password" required />
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                驗證碼
-                <img ng-model="validationCodeImg" alt="validation code"/>
-                <input class="form-control" ng-model="login.validationCode" required />
-            </label>
-        </div>
-        <div style="position: absolute; right: 10px; top: 10px;">
-            <a class="btn btn-primary">Facebook 登入</a>
-        </div>
-    </div>
-    <div class="panel-footer">
-        <div style="float: right;">
-            <button class="btn btn-default" ng-click="login()">登入</button>
-        </div>
-        <div class="left;">
-            <button class="btn btn-link" ng-click="register()">註冊</button>
-            <button class="btn btn-link" ng-click="forgot()">忘記密碼</button>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
+</form>

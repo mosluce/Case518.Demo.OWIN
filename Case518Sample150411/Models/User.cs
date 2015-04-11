@@ -18,9 +18,11 @@ namespace Case518Sample150411.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string ValidationCode { get; set; }
-        public bool Validated { get; set; }
+        public string ActivationCode { get; set; }
+        public bool Activated { get; set; }
         public UserGender Gender { get; set; }
         public bool Subscribe { get; set; }
+        public Nullable<System.DateTime> RegisterDate { get; set; }
+        public Nullable<System.DateTime> ActivatedDate { get; set; }
     }
 }

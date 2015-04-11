@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +24,35 @@ namespace Case518Sample150411.Controllers
         public ActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Login(LoginViewModel model)
+        {
+            if (!Session["ValidationCode"].Equals(model.ValidationCode)) return Json(Result.CreateFailure("驗證碼輸入錯誤"));
+
+            using (var db = new SampleDbContext())
+            {
+                var user = db.Users.FirstOrDefault(c => c.Email == model.Email);
+                
+                if (user == null) return Json(Result.CreateFailure("帳號錯誤"));
+                if (user.Password != model.Password) return Json(Result.CreateFailure("密碼錯誤"));
+                if (!user.Activated) return Json(Result.CreateFailure("尚未開通"));
+
+                //OWIN登入
+                var ctx = Request.GetOwinContext();
+                var auth = ctx.Authentication;
+                var claim = new ClaimsIdentity(new []
+                {
+                    new Claim(ClaimTypes.Name, user.Name),
+                    new Claim(ClaimTypes.Email, user.Email) 
+                }, "ApplicationCookie");
+                
+                auth.SignIn(claim);
+
+                return Json(Result.CreateSuccess(user));
+            }
         }
 
         [HttpGet]
@@ -71,8 +101,9 @@ namespace Case518Sample150411.Controllers
                     Name = model.Name,
                     Password = model.Password,
                     Subscribe = model.Subscribe,
-                    Validated = false,
-                    ValidationCode = code
+                    Activated = false,
+                    ActivationCode = code,
+                    RegisterDate = DateTime.Now
                 });
 
                 try
@@ -94,7 +125,22 @@ namespace Case518Sample150411.Controllers
         [AllowAnonymous]
         public ActionResult Activate(string code)
         {
-            return RedirectToAction("Login");
+            using (var db = new SampleDbContext())
+            {
+                var user = db.Users.FirstOrDefault(c => c.ActivationCode == code);
+
+                if (user != null)
+                {
+                    //不重複啟動
+                    if (!user.Activated) { 
+                        user.Activated = true;
+                        user.ActivatedDate = DateTime.Now;
+                        db.SaveChanges();
+                        return View(true);
+                    }
+                }
+            }
+            return View(false);
         }
     }
 }

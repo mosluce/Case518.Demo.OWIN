@@ -4,62 +4,63 @@
 }
 
 <form name="Form">
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            註冊表單
-        </div>
-        <div class="panel-body" style="position: relative;">
-            <div class="form-group">
-                <label>
-                    電子郵件 <input class="form-control"
-                                ng-model="user.email"
-                                required
-                                type="email" />
-                </label>
+    <div cg-busy="onprocess">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                註冊表單
             </div>
-            <div class="form-group">
-                <label>
-                    密碼 <input class="form-control" ng-model="user.password" type="password" required />
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    名字 <input class="form-control" ng-model="user.name" required />
-                </label>
-            </div>
-            <div class="form-group">
-                <div class="radio" ng-init="user.gender=0">
+            <div class="panel-body" style="position: relative;">
+                <div class="form-group">
                     <label>
-                        <input ng-model="user.gender" type="radio" required name="gender" value="0" />男
+                        電子郵件 <input class="form-control"
+                                    ng-model="user.email"
+                                    required
+                                    type="email" />
                     </label>
+                </div>
+                <div class="form-group">
                     <label>
-                        <input ng-model="user.gender" type="radio" required name="gender" value="1" />女
+                        密碼 <input class="form-control" ng-model="user.password" type="password" required />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        名字 <input class="form-control" ng-model="user.name" required />
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="radio" ng-init="user.gender=0">
+                        <label>
+                            <input ng-model="user.gender" type="radio" required name="gender" value="0" />男
+                        </label>
+                        <label>
+                            <input ng-model="user.gender" type="radio" required name="gender" value="1" />女
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox" ng-init="user.subscribe=true">
+                        <label>
+                            <input ng-model="user.subscribe" type="checkbox" />訂閱電子報
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        驗證碼
+                        <p>
+                            <img ng-src="{{vcimg}}" alt="validation code" ng-click="getvc()" />
+                            <input class="form-control" ng-model="user.validationCode" required />
+                        </p>
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="checkbox" ng-init="user.subscribe=true">
-                    <label>
-                        <input ng-model="user.subscribe" type="checkbox" />訂閱電子報
-                    </label>
+            <div class="panel-footer">
+                <div style="float: right;">
+                    <button class="btn btn-default" ng-click="submit()">送出</button>
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="form-group">
-                <label>
-                    驗證碼
-                    <p>
-                        <img ng-src="{{vcimg}}" alt="validation code" ng-click="getvc()" />
-                        <input class="form-control" ng-model="user.validationCode" required />
-                    </p>
-                </label>
-            </div>
-        </div>
-        <div class="panel-footer">
-            <div style="float: right;">
-                <button class="btn btn-default" ng-click="submit()">送出</button>
-            </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </form>

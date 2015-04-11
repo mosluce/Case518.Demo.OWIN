@@ -670,6 +670,7 @@
       <DependentUpon>SampleDbContext.edmx</DependentUpon>
       <LastGenOutput>SampleDbContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Auth\Activate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

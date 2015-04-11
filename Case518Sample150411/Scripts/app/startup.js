@@ -1,5 +1,5 @@
 ﻿(function() {
-    var app = angular.module("app", ["ui.router", "oc.lazyLoad", "validation", "validation.rule"]);
+    var app = angular.module("app", ["ui.router", "oc.lazyLoad", "validation", "validation.rule", "cgBusy"]);
 
     app.config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("home");
