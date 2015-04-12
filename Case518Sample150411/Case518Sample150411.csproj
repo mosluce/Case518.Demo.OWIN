@@ -129,6 +129,7 @@
     <Content Include="Global.asax" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\app\ctrl\auth\login.js" />
+    <Content Include="Scripts\app\ctrl\auth\modify.js" />
     <Content Include="Scripts\app\ctrl\auth\register.js" />
     <Content Include="Scripts\app\startup.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -640,6 +641,7 @@
     <Content Include="Scripts\bower_components\modernizr\test\caniuse_files\Windsong-webfont.woff" />
     <Content Include="Views\Auth\Activate.cshtml" />
     <None Include="Properties\PublishProfiles\Case518Sample150411.pubxml" />
+    <Content Include="Views\Auth\Modify.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

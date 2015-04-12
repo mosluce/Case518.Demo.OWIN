@@ -1,8 +1,8 @@
 ﻿(function() {
     var app = angular.module("app");
 
-    app.controller("AuthLoginController", function ($scope, $rootScope, $state, $http, $validation) {
-
+    app.controller("AuthLoginController", function ($scope, $rootScope, $state, $http, $validation, identity) {
+        console.log(identity);
         /**
          * 產生驗證碼
          */
@@ -19,8 +19,9 @@
                 $scope.onprocess = $http.post("/auth/login", $scope.user).success(function (result) {
                     if (result.Success) {
                         //切換選單狀態
-                        $rootScope.authenticated = true;
-                        $rootScope.username = result.Data.Name;
+                        identity.isAuthenticated = true;
+                        identity.username = result.Data.Name;
+                        
                         //回到首頁
                         $state.go("home");
                     } else {

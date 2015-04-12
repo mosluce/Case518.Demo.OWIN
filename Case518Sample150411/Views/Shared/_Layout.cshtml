@@ -24,7 +24,9 @@
     <script src="~/Scripts/app/startup.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" ng-init="authenticated=@(User.Identity.IsAuthenticated?"true":"false");username='@(User.Identity.Name)';">
+    <div class="navbar navbar-inverse navbar-fixed-top"
+         ng-init="init(@(User.Identity.IsAuthenticated?1:0), '@User.Identity.Name')"
+         ng-controller="MenuController">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,21 +37,21 @@
                 @Html.ActionLink("Hi!OWIN", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div>
-                <ul class="nav navbar-nav" ng-show="authenticated">
+                <ul class="nav navbar-nav" ng-show="identity.isAuthenticated">
                     <li>
                         <a ui-sref="auth.logout">
                             登出
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-show="authenticated">
+                <ul class="nav navbar-nav navbar-right" ng-show="identity.isAuthenticated">
                     <li>
-                        <a ui-sref="auth.profile">
-                            Hello {{username}} !!
+                        <a ui-sref="auth.modify">
+                            Hello {{identity.username}} !!
                         </a>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav" ng-hide="authenticated">
+                <ul class="nav navbar-nav" ng-hide="identity.isAuthenticated">
                     <li>
                         <a ui-sref="auth.login">
                             登入

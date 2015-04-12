@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Claims;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -141,6 +142,23 @@ namespace Case518Sample150411.Controllers
                 }
             }
             return View(false);
+        }
+
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+
+            authManager.SignOut("ApplicationCookie");
+
+            return Json(Result.CreateSuccess(new {}));
+        }
+
+        [HttpGet]
+        public ActionResult Modify()
+        {
+            return View();
         }
     }
 }

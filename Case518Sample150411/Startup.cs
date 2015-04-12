@@ -23,6 +23,8 @@ namespace Case518Sample150411
                 LoginPath = new PathString("/#/auth/login")
             });
 
+            
+
             app.UseFacebookAuthentication(new FacebookAuthenticationOptions
             {
                 AppId = "530981250373549",
