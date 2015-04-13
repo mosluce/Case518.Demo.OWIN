@@ -35,7 +35,7 @@ namespace Sample
             };
 
             fbOpt.Scope.Add("email");
-            fbOpt.Scope.Add("user_birthday");
+            //fbOpt.Scope.Add("user_birthday");
 
             app.UseFacebookAuthentication(fbOpt);
         }
