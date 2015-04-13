@@ -1,0 +1,103 @@
+﻿@model Sample.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<script type="text/javascript">
+    var app = angular.module("app", ['datePicker']);
+    app.controller("RegController", function ($scope) {
+
+        $scope.refreshCaptcha = function () {
+            $scope.captcha = '@Url.Action("Captcha")' + "?" + new Date().getTime();
+        };
+    });
+</script>
+
+
+<div ng-app="app">
+    <h2>Register</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" ng-controller="RegController">
+        <h4>RegisterViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password,  new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10" ng-init="gender=0">
+                <label class="control-label col-md-2">性別</label>
+                <div class="col-md-10">
+                    <label>
+                        <input value="0" name="Gender" type="radio" ng-model="gender"/>男
+                    </label>
+                    <label>
+                        <input value="1" name="Gender" type="radio" ng-model="gender" />女
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Birthday, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type="datetime" date-time ng-model="start" name="Birthday" max-view="date" min-view="date" auto-close="true" format="yyyy-MM-dd">
+            </div>
+        </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subscription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Subscription)
+                        @Html.ValidationMessageFor(model => model.Subscription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Captcha, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <img ng-src="{{captcha}} " alt="captcha"
+                         ng-init="refreshCaptcha()"
+                         ng-click="refreshCaptcha()" />
+                    @Html.EditorFor(model => model.Captcha, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Captcha, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="註冊" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

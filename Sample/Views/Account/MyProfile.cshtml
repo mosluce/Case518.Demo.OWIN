@@ -1,0 +1,90 @@
+﻿@using System.Globalization
+@using Sample.Models
+@model Sample.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "MyProfile";
+}
+
+<script type="text/javascript">
+    var app = angular.module("app", ['datePicker']);
+    app.controller("ProfileController", function ($scope) {
+        console.log(123);
+    });
+</script>
+
+<h2>MyProfile</h2>
+
+<div ng-app="app">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal" ng-controller="ProfileController">
+            <h4>ProfileViewModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Model.Email
+                    @Html.HiddenFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+           
+            <div class="form-group" ng-show="@(ViewBag.IsLoginByFacebook?"0":"1")">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+
+                <div class="col-md-10" ng-init="gender=@(Model.Gender==Gender.Male?0:1)">
+                    <label class="control-label col-md-2">性別</label>
+                    <div class="col-md-10">
+                        <label>
+                            <input value="0" name="Gender" type="radio" ng-model="gender" />男
+                        </label>
+                        <label>
+                            <input value="1" name="Gender" type="radio" ng-model="gender" />女
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-init="birthday='@Model.Birthday.Value.ToString("yyyy-MM-dd")'">
+                @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="datetime" date-time ng-model="birthday" name="Birthday" max-view="date" min-view="date" auto-close="true" format="yyyy-MM-dd">
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subscription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Subscription)
+                        @Html.ValidationMessageFor(model => model.Subscription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="儲存" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

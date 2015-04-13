@@ -1,0 +1,17 @@
+﻿@using System.Web.UI.WebControls
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Good Moring! @User.Identity.Name</h2>
+               
+}
+else
+{
+    <h2>Hello World</h2>
+}
+
+
